@@ -45,12 +45,11 @@ public class MainActivity extends AppCompatActivity {
         toggle.setHomeAsUpIndicator(R.drawable.ic_menu);
         toggle.syncState();
 
-        Button confrim = findViewById(R.id.confirm);
-        confrim.setOnClickListener(view -> {
+        Button confirm = findViewById(R.id.confirm);
+        confirm.setOnClickListener(view -> {
             Toast.makeText(this, "HELLO", Toast.LENGTH_SHORT).show();
             drawerLayout.closeDrawer(GravityCompat.START);
         });
-
     }
 
     @Override

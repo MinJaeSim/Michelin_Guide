@@ -9,24 +9,23 @@ import com.bumptech.glide.Glide;
 
 public class RestaurantViewHolder extends RecyclerView.ViewHolder {
     private TextView titleText;
-    private TextView descText;
+    private TextView categoryText;
     private ImageView imageView;
 
     public RestaurantViewHolder(View itemView) {
         super(itemView);
 
         titleText = itemView.findViewById(R.id.text_title);
-        descText = itemView.findViewById(R.id.text_description);
+        categoryText = itemView.findViewById(R.id.text_category);
         imageView = itemView.findViewById(R.id.image_project);
     }
 
     void setProjectView(Restaurant restaurant) {
         titleText.setText(restaurant.getrName());
-//        descText.setText(restaurant.getDescription());
+        categoryText.setText(restaurant.getCategory());
 
-        // Image - Glide
         Glide.with(this.imageView)
-                .load(restaurant.imageResourceAt(0))
+                .load(restaurant.getImgRsc1())
                 .into(imageView);
     }
 

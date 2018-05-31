@@ -13,11 +13,10 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DatabaseClient implements DatabaseAPI {
-    private OkHttpClient client;
     private DatabaseAPI api;
 
     private DatabaseClient() {
-        client = new OkHttpClient.Builder().retryOnConnectionFailure(true).build();
+        OkHttpClient client = new OkHttpClient.Builder().retryOnConnectionFailure(true).build();
 
         Gson gson = new GsonBuilder().create();
         GsonConverterFactory gsonConverterFactory = GsonConverterFactory.create(gson);
@@ -27,6 +26,7 @@ public class DatabaseClient implements DatabaseAPI {
                 .addConverterFactory(gsonConverterFactory)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .baseUrl("http://18.182.5.115:8888/a/").build();
+
         api = retrofit.create(DatabaseAPI.class);
     }
 

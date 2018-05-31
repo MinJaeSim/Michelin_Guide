@@ -35,30 +35,13 @@ public class RestaurantFragment extends Fragment {
 
         new Thread(() -> {
             try {
-                List<Restaurant> list =DatabaseClient.getInstance().getRestaurant().execute().body();
-                System.out.println(list.get(0).toString());
+                List<Restaurant> list = DatabaseClient.getInstance().getRestaurant().execute().body();
                 adapter.setRestaurantList(list);
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        adapter.notifyDataSetChanged();
-                    }
-                });
+                getActivity().runOnUiThread(adapter::notifyDataSetChanged);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }).start();
-
-//        DatabaseClient.getInstance().getRestaurantObserve()
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(restaurants -> {
-//                    System.out.println("TEST");
-//                    System.out.println("TEST : " + restaurants);
-//                    adapter.setRestaurantList(restaurants);
-//                    adapter.notifyDataSetChanged();
-//                }, e -> {
-//                    System.out.println(e);
-//                });
 
         return view;
     }
