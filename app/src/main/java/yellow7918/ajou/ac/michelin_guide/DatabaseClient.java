@@ -36,8 +36,8 @@ public class DatabaseClient implements DatabaseAPI {
     }
 
     @Override
-    public Observable<List<Restaurant>> getRestaurantObserve() {
-        return api.getRestaurantObserve();
+    public Call<List<Restaurant>> getRestaurantBySimpleQuery(String loc, String cat, String name) {
+        return api.getRestaurantBySimpleQuery(loc, cat, name);
     }
 
     private static class SingleTon {

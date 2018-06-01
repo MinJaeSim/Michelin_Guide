@@ -17,11 +17,11 @@ public class Restaurant {
     private String homepage;
     @SerializedName("Price")
     private int price;
-    @SerializedName("Url1")
+    @SerializedName("Image1")
     private String imgRsc1;
-    @SerializedName("Url2")
+    @SerializedName("Image2")
     private String imgRsc2;
-    @SerializedName("Url3")
+    @SerializedName("Image3")
     private String imgRsc3;
     @SerializedName("Category")
     private String category;

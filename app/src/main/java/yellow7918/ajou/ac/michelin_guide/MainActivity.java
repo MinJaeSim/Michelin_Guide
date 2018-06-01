@@ -15,9 +15,18 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.Toast;
+
+import com.appyvet.materialrangebar.RangeBar;
 
 import java.util.ArrayList;
 
@@ -40,14 +49,48 @@ public class MainActivity extends AppCompatActivity {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
         drawerLayout.addDrawerListener(toggle);
 
-        getSupportFragmentManager().beginTransaction().add(R.id.container, new RestaurantFragment()).commit();
+        RestaurantFragment fragment = new RestaurantFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.container, fragment).commit();
 
         toggle.setHomeAsUpIndicator(R.drawable.ic_menu);
         toggle.syncState();
 
         Button confirm = findViewById(R.id.confirm);
+
+        EditText location = findViewById(R.id.text_location);
+        EditText category = findViewById(R.id.text_category);
+        RangeBar money = findViewById(R.id.money);
+
+        String[] spinnerList = {"식당", "지역", "요리"};
+        SpinnerAdapter spinnerAdapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, spinnerList);
+        Spinner spinner = findViewById(R.id.spinner_category);
+        spinner.setAdapter(spinnerAdapter);
+        spinner.setSelection(0);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        ImageView searchButton = findViewById(R.id.search_button);
+        searchButton.setOnClickListener(view -> {
+            fragment.updateListBySimpleQuery("서","","");
+            Toast.makeText(this, (String) spinner.getSelectedItem(), Toast.LENGTH_SHORT).show();
+        });
+
         confirm.setOnClickListener(view -> {
-            Toast.makeText(this, "HELLO", Toast.LENGTH_SHORT).show();
+            String loc = location.getText().toString();
+            String cat = category.getText().toString();
+            String min = money.getLeftPinValue();
+            String max = money.getRightPinValue();
+
+            Toast.makeText(this, loc + "/" + cat + "/" + min + "/" + max, Toast.LENGTH_SHORT).show();
             drawerLayout.closeDrawer(GravityCompat.START);
         });
     }

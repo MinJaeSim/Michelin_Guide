@@ -40,66 +40,71 @@
         android:layout_height="wrap_content"
         android:text="가격 (천원)" />
 
-    <com.appyvet.materialrangebar.RangeBar
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <com.appyvet.materialrangebar.RangeBar xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/money"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
+        app:mrb_barWeight="4dp"
         app:mrb_pinMaxFont="10sp"
-        app:mrb_rangeBarPaddingBottom="12dp"
         app:mrb_pinTextColor="#ACD123"
         app:mrb_selectorSize="8dp"
         app:mrb_temporaryPins="true"
-        app:mrb_barWeight="4dp"
         app:mrb_tickEnd="20"
         app:mrb_tickInterval="1"
-        app:mrb_tickStart="0"/>
+        app:mrb_tickStart="0" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="등급" />
 
-    <RadioGroup
+
+    <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <RadioButton
-            android:id="@+id/grade_5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="bottom"
-            android:text="3스타"/>
+        android:layout_height="match_parent">
 
-        <RadioButton
-            android:id="@+id/grade_4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="bottom"
-            android:text="2스타"/>
+        <TableRow>
 
-        <RadioButton
-            android:id="@+id/grade_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="bottom"
-            android:textAlignment="gravity"
-            android:text="1스타"/>
+            <CheckBox
+                android:id="@+id/grade_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:text="3스타" />
 
-        <RadioButton
-            android:id="@+id/grade_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="bottom"
-            android:text="0.5스타"/>
+            <CheckBox
+                android:id="@+id/grade_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:text="2스타" />
 
-        <RadioButton
-            android:id="@+id/grade_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="bottom"
-            android:text="0스타"/>
-    </RadioGroup>
+            <CheckBox
+                android:id="@+id/grade_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:text="1스타"
+                android:textAlignment="gravity" />
+        </TableRow>
 
+        <TableRow>
+
+            <CheckBox
+                android:id="@+id/grade_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:text="0.5스타" />
+
+            <CheckBox
+                android:id="@+id/grade_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:text="0스타" />
+        </TableRow>
+    </TableLayout>
 </LinearLayout>

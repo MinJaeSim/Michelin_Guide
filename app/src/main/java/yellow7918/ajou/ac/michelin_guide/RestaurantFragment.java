@@ -19,6 +19,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 public class RestaurantFragment extends Fragment {
 
     private RecyclerView recyclerView;
+    private RestaurantListAdapter adapter;
 
     @Nullable
     @Override
@@ -30,7 +31,7 @@ public class RestaurantFragment extends Fragment {
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(layoutManager);
 
-        RestaurantListAdapter adapter = new RestaurantListAdapter(new ArrayList<>());
+        adapter = new RestaurantListAdapter(new ArrayList<>());
         recyclerView.setAdapter(adapter);
 
         new Thread(() -> {
@@ -45,4 +46,17 @@ public class RestaurantFragment extends Fragment {
 
         return view;
     }
+
+    public void updateListBySimpleQuery(String loc, String cat, String name) {
+        new Thread(() -> {
+            try {
+                List<Restaurant> list = DatabaseClient.getInstance().getRestaurantBySimpleQuery(loc, cat, name).execute().body();
+                adapter.setRestaurantList(list);
+                getActivity().runOnUiThread(adapter::notifyDataSetChanged);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
 }
