@@ -40,6 +40,11 @@ public class DatabaseClient implements DatabaseAPI {
         return api.getRestaurantBySimpleQuery(loc, cat, name);
     }
 
+    @Override
+    public Call<List<Restaurant>> getRestaurantByComplexQuery(String loc, String cat, String min, String max, String grade) {
+        return api.getRestaurantByComplexQuery(loc, cat, min, max, grade);
+    }
+
     private static class SingleTon {
         private static final DatabaseClient INSTANCE = new DatabaseClient();
     }

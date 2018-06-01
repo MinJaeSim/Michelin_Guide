@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
@@ -52,7 +53,31 @@ public class RestaurantFragment extends Fragment {
             try {
                 List<Restaurant> list = DatabaseClient.getInstance().getRestaurantBySimpleQuery(loc, cat, name).execute().body();
                 adapter.setRestaurantList(list);
-                getActivity().runOnUiThread(adapter::notifyDataSetChanged);
+                Objects.requireNonNull(getActivity()).runOnUiThread(adapter::notifyDataSetChanged);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
+    public void updateListByComplexQuery(String loc, String cat, String min, String max, String grade) {
+        new Thread(() -> {
+            try {
+                List<Restaurant> list = DatabaseClient.getInstance().getRestaurantByComplexQuery(loc, cat, min, max, grade).execute().body();
+                adapter.setRestaurantList(list);
+                Objects.requireNonNull(getActivity()).runOnUiThread(adapter::notifyDataSetChanged);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
+    public void updateListAll() {
+        new Thread(() -> {
+            try {
+                List<Restaurant> list = DatabaseClient.getInstance().getRestaurant().execute().body();
+                adapter.setRestaurantList(list);
+                Objects.requireNonNull(getActivity()).runOnUiThread(adapter::notifyDataSetChanged);
             } catch (IOException e) {
                 e.printStackTrace();
             }

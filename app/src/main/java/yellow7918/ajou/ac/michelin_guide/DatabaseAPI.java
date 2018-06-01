@@ -13,4 +13,7 @@ public interface DatabaseAPI {
 
     @GET("restaurant/simple")
     Call<List<Restaurant>> getRestaurantBySimpleQuery(@Query("loc") String loc, @Query("cat") String cat, @Query("name") String name);
+
+    @GET("restaurant/complex")
+    Call<List<Restaurant>> getRestaurantByComplexQuery(@Query("loc") String loc, @Query("cat") String cat, @Query("min") String min, @Query("max") String max, @Query("grade") String grade);
 }
