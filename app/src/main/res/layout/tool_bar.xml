@@ -3,8 +3,7 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="?android:attr/actionBarSize"
-    android:background="#ff0000"
-    android:title="TEST">
+    android:background="#ff0000">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,7 +14,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_centerVertical="true"
-            android:text="미슐랭 서울"
+            android:text="@string/string_toolbar_name"
             android:textAlignment="center" />
     </RelativeLayout>
 

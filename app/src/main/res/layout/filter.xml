@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="지역" />
+        android:text="@string/string_location" />
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="요리 유형" />
+        android:text="@string/string_category" />
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -38,7 +38,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="가격 (천원)" />
+        android:text="@string/string_money" />
 
     <com.appyvet.materialrangebar.RangeBar xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/money"
@@ -58,7 +58,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="등급" />
+        android:text="@string/string_grade" />
 
 
     <TableLayout

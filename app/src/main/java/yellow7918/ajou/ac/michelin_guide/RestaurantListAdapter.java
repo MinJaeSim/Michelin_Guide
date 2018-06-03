@@ -10,6 +10,11 @@ import java.util.List;
 
 public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantViewHolder> {
     private List<Restaurant> restaurantList;
+    private OnRestaurantClickListener listener;
+
+    public void setListener(OnRestaurantClickListener listener) {
+        this.listener = listener;
+    }
 
     public RestaurantListAdapter(List<Restaurant> restaurantList) {
         this.restaurantList = restaurantList;
@@ -26,6 +31,7 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantViewHo
     public void onBindViewHolder(@NonNull RestaurantViewHolder holder, int position) {
         Restaurant restaurant = restaurantList.get(position);
         holder.setProjectView(restaurant);
+        holder.itemView.setOnClickListener(view -> listener.onClickRestaurant(restaurantList.get(position)));
     }
 
     @Override

@@ -1,5 +1,16 @@
 <resources>
     <string name="app_name">Michelin_Guide</string>
+    <string name="string_search">검색</string>
+    <string name="string_location">지역</string>
+    <string name="string_category">요리 유형</string>
+    <string name="string_money">가격 (천원)</string>
+    <string name="string_grade">등급</string>
+    <string name="string_toolbar_name">미슐랭 서울</string>
 
+    <string name="string_simple_category1">식당</string>
+    <string name="string_simple_category2">지역</string>
+    <string name="string_simple_category3">요리</string>
 
+    <string name="string_input_warning">검색어를 입력해 주세요</string>
+    <string name="string_close_warning"> 한 번 더 누르면 종료됩니다.</string>
 </resources>

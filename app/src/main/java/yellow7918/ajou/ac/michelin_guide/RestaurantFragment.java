@@ -34,7 +34,7 @@ public class RestaurantFragment extends Fragment {
 
         adapter = new RestaurantListAdapter(new ArrayList<>());
         recyclerView.setAdapter(adapter);
-
+        adapter.setListener((MainActivity)getActivity());
         new Thread(() -> {
             try {
                 List<Restaurant> list = DatabaseClient.getInstance().getRestaurant().execute().body();

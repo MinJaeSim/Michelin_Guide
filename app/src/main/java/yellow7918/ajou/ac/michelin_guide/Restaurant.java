@@ -2,9 +2,10 @@ package yellow7918.ajou.ac.michelin_guide;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Restaurant {
+public class Restaurant implements Serializable{
     @SerializedName("RNumber")
     private String rNumber;
     @SerializedName("KName")
