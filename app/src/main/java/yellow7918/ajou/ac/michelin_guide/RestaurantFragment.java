@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -84,4 +85,24 @@ public class RestaurantFragment extends Fragment {
         }).start();
     }
 
+    public void sortItemByAlphabet() {
+        List<Restaurant> list = adapter.getRestaurantList();
+        Collections.sort(list, (o1, o2) -> o1.getrName().compareTo(o2.getrName()));
+        adapter.setRestaurantList(list);
+        adapter.notifyDataSetChanged();
+    }
+
+    public void sortItemByPrice() {
+        List<Restaurant> list = adapter.getRestaurantList();
+        Collections.sort(list, (o1, o2) -> Integer.compare(o2.getPrice(), o1.getPrice()));
+        adapter.setRestaurantList(list);
+        adapter.notifyDataSetChanged();
+    }
+
+    public void sortItemByGrade() {
+        List<Restaurant> list = adapter.getRestaurantList();
+        Collections.sort(list, (o1, o2) -> Integer.compare(o1.getGrade(), o2.getGrade()));
+        adapter.setRestaurantList(list);
+        adapter.notifyDataSetChanged();
+    }
 }

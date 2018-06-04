@@ -17,6 +17,10 @@ public class ImageViewPageAdapter extends PagerAdapter {
     public ImageViewPageAdapter(LayoutInflater layoutInflater, String[] strings) {
         this.inflater = layoutInflater;
         this.resources = strings;
+        if (resources[1].length() < 1) {
+            resources[1] = resources[0];
+            resources[2] = resources[0];
+        }
     }
 
     @Override
@@ -29,7 +33,6 @@ public class ImageViewPageAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         View view = inflater.inflate(R.layout.viewpager_image_view, null);
         ImageView imageView = view.findViewById(R.id.viewpager_image_view);
-
 
         Glide.with(imageView)
                 .load(resources[position])

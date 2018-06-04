@@ -1,20 +1,17 @@
 package yellow7918.ajou.ac.michelin_guide;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.res.Configuration;
-import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,35 +20,45 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 import com.appyvet.materialrangebar.RangeBar;
 
-import java.util.Locale;
-
 public class MainActivity extends AppCompatActivity implements OnRestaurantClickListener {
+
+    public static String language = "ko";
 
     private DrawerLayout drawerLayout;
     private RestaurantFragment fragment;
     private long pressedTime;
 
-    public static String language = "ko";
+    private RadioButton alphabetOrder;
+    private RadioButton priceOrder;
+    private RadioButton gradeOrder;
+
+    private ActionBarDrawerToggle toggle;
+    private LinearLayout searchLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        searchLayout = findViewById(R.id.search_layout);
+
         drawerLayout = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
         drawerLayout.addDrawerListener(toggle);
 
         NavigationView navigationView = findViewById(R.id.navigation_view);
@@ -78,9 +85,12 @@ public class MainActivity extends AppCompatActivity implements OnRestaurantClick
         navigationView.getHeaderView(0).setBackground(d);
 
         fragment = new RestaurantFragment();
+        fragment.updateListAll(MainActivity.language);
         getSupportFragmentManager().beginTransaction().add(R.id.container, fragment).commit();
 
-        toggle.setHomeAsUpIndicator(R.drawable.ic_menu);
+        Drawable menu = getDrawable(R.drawable.ic_menu);
+        menu.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+        toggle.setHomeAsUpIndicator(menu);
         toggle.syncState();
 
         CheckBox grade1 = findViewById(R.id.grade_1);
@@ -132,20 +142,33 @@ public class MainActivity extends AppCompatActivity implements OnRestaurantClick
         Spinner spinner = findViewById(R.id.spinner_category);
         spinner.setAdapter(spinnerAdapter);
         spinner.setSelection(0);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-            }
+        alphabetOrder = findViewById(R.id.filter_character);
+        priceOrder = findViewById(R.id.filter_money);
+        gradeOrder = findViewById(R.id.filter_grade);
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+        alphabetOrder.setOnClickListener(v -> {
+            alphabetOrder.setTextColor(Color.WHITE);
+            priceOrder.setTextColor(Color.BLACK);
+            gradeOrder.setTextColor(Color.BLACK);
+            fragment.sortItemByAlphabet();
+        });
 
-            }
+        priceOrder.setOnClickListener(v -> {
+            priceOrder.setTextColor(Color.WHITE);
+            gradeOrder.setTextColor(Color.BLACK);
+            alphabetOrder.setTextColor(Color.BLACK);
+            fragment.sortItemByPrice();
+        });
+
+        gradeOrder.setOnClickListener(v -> {
+            gradeOrder.setTextColor(Color.WHITE);
+            priceOrder.setTextColor(Color.BLACK);
+            alphabetOrder.setTextColor(Color.BLACK);
+            fragment.sortItemByGrade();
         });
 
         EditText editText = findViewById(R.id.text_search);
-
         ImageView searchButton = findViewById(R.id.search_button);
         searchButton.setOnClickListener(view -> {
             String searchData = editText.getText().toString();
@@ -218,6 +241,8 @@ public class MainActivity extends AppCompatActivity implements OnRestaurantClick
             drawerLayout.closeDrawer(GravityCompat.START);
         else {
             if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                alphabetOrder.performClick();
+                showSearch();
                 super.onBackPressed();
                 return;
             }
@@ -239,7 +264,18 @@ public class MainActivity extends AppCompatActivity implements OnRestaurantClick
 
     @Override
     public void onClickRestaurant(Restaurant restaurant) {
+        hideSearch();
         getSupportFragmentManager().beginTransaction().replace(R.id.container, RestaurantDetailFragment.newInstance(restaurant)).addToBackStack(null).commit();
+    }
+
+    private void hideSearch() {
+        searchLayout.setVisibility(View.GONE);
+        toggle.setDrawerIndicatorEnabled(false);
+    }
+
+    private void showSearch() {
+        searchLayout.setVisibility(View.VISIBLE);
+        toggle.setDrawerIndicatorEnabled(true);
     }
 
     @Override

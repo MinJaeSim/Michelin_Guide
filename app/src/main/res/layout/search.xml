@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/search_layout"
     android:orientation="vertical">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -15,8 +16,9 @@
             android:id="@+id/spinner_category"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:textAlignment="center"
             android:layout_gravity="center_vertical"
-            android:layout_weight="0.4" />
+            android:layout_weight="0.5" />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="0dp"
@@ -26,7 +28,10 @@
             <EditText
                 android:id="@+id/text_search"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/colorPrimary"
+                android:textColor="@color/colorPrimary"
+                android:textCursorDrawable="@color/colorBlack" />
         </android.support.design.widget.TextInputLayout>
 
         <ImageView
@@ -43,30 +48,45 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/filter_character"
-            android:layout_width="90dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="16dp"
-            android:text="가나다"
-            android:textSize="12sp" />
-
-        <Button
-            android:id="@+id/filter_grade"
-            android:layout_width="90dp"
-            android:layout_height="40dp"
-            android:text="가격순"
-            android:textSize="12sp"
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_centerInParent="true"
-            />
+            android:checkedButton="@id/filter_character">
 
-        <Button
-            android:id="@+id/filter_money"
-            android:layout_width="90dp"
-            android:layout_height="40dp"
-            android:text="등급순"
-            android:textSize="12sp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="16dp"/>
+            <RadioButton
+                android:id="@+id/filter_character"
+                android:layout_width="90dp"
+                android:layout_height="30dp"
+                android:background="@drawable/selector_search_filter"
+                android:button="@null"
+                android:text="@string/string_alphabet_order"
+                android:textAlignment="center"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/filter_money"
+                android:layout_width="90dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/selector_search_filter"
+                android:button="@null"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/string_price_order"
+                android:textAlignment="center"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/filter_grade"
+                android:layout_width="90dp"
+                android:layout_height="30dp"
+                android:background="@drawable/selector_search_filter"
+                android:button="@null"
+                android:text="@string/string_grade_order"
+                android:textAlignment="center"
+                android:textSize="12sp" />
+        </RadioGroup>
     </RelativeLayout>
 </LinearLayout>

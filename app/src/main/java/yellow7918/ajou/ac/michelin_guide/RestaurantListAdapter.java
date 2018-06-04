@@ -42,6 +42,10 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantViewHo
             return 0;
     }
 
+    public List<Restaurant> getRestaurantList() {
+        return restaurantList;
+    }
+
     public void setRestaurantList(List<Restaurant> restaurantList) {
         this.restaurantList = restaurantList;
     }
