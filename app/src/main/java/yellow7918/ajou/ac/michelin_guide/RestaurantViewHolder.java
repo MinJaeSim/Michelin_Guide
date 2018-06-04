@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 public class RestaurantViewHolder extends RecyclerView.ViewHolder {
     private TextView titleText;
@@ -26,6 +27,8 @@ public class RestaurantViewHolder extends RecyclerView.ViewHolder {
 
         Glide.with(this.imageView)
                 .load(restaurant.getImgRsc1())
+                .apply(new RequestOptions()
+                        .centerCrop())
                 .into(imageView);
     }
 

@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -52,6 +53,29 @@ public class MainActivity extends AppCompatActivity implements OnRestaurantClick
         drawerLayout = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
         drawerLayout.addDrawerListener(toggle);
+
+        NavigationView navigationView = findViewById(R.id.navigation_view);
+        int bg = (int) (Math.random() * 4);
+        Drawable d;
+        switch (bg) {
+            case 0:
+                d = getDrawable(R.drawable.bg1);
+                break;
+            case 1:
+                d = getDrawable(R.drawable.bg2);
+                break;
+            case 2:
+                d = getDrawable(R.drawable.bg3);
+                break;
+            case 3:
+                d = getDrawable(R.drawable.bg4);
+                break;
+            default:
+                d = getDrawable(R.drawable.bg1);
+                break;
+        }
+
+        navigationView.getHeaderView(0).setBackground(d);
 
         fragment = new RestaurantFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.container, fragment).commit();
@@ -130,12 +154,11 @@ public class MainActivity extends AppCompatActivity implements OnRestaurantClick
                 return;
             }
 
-            String loc = "";
-            String cat = "";
-            String name = "";
+            String loc = null;
+            String cat = null;
+            String name = null;
             String type = ((String) spinner.getSelectedItem());
 
-            //
             if (type.contains("요") || type.contains("Dish"))
                 cat = searchData;
             else if (type.contains("식") || type.contains("Name"))
@@ -144,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements OnRestaurantClick
                 loc = searchData;
 
             fragment.updateListBySimpleQuery(MainActivity.language, loc, cat, name);
-            Toast.makeText(this, type + " / " + editText.getText().toString(), Toast.LENGTH_SHORT).show();
+            drawerLayout.closeDrawer(GravityCompat.START);
         });
 
         confirm.setOnClickListener(view -> {
@@ -164,12 +187,13 @@ public class MainActivity extends AppCompatActivity implements OnRestaurantClick
             drawerLayout.closeDrawer(GravityCompat.START);
         });
 
-        NavigationView navigationView = findViewById(R.id.navigation_view);
+
         Button changeLocale = navigationView.getHeaderView(0).findViewById(R.id.change_locale);
         changeLocale.setOnClickListener(v -> {
             language = language.equals("en") ? "ko" : "en";
             recreate();
             getSupportFragmentManager().beginTransaction().detach(getSupportFragmentManager().getFragments().get(0)).commit();
+            drawerLayout.closeDrawer(GravityCompat.START);
         });
     }
 

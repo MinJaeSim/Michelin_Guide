@@ -6,7 +6,7 @@
     android:layout_height="200dp"
     android:gravity="bottom"
     android:orientation="vertical"
-    android:background="#a82"
+    android:background="@drawable/bg3"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <TextView
