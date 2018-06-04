@@ -152,17 +152,15 @@ public class MainActivity extends AppCompatActivity implements OnRestaurantClick
             String cat = category.getText().toString();
             String min = String.valueOf(Integer.parseInt(money.getLeftPinValue()) * 10000);
             String max = String.valueOf(Integer.parseInt(money.getRightPinValue()) * 10000);
-            String grade = "";
+            String grade = "-1";
             for (int i = 0; i < grades.length; i++) {
                 if (grades[i].isChecked()) {
                     grade = String.valueOf(i + 1);
                     break;
                 }
-
             }
 
             fragment.updateListByComplexQuery(MainActivity.language, loc, cat, min, max, grade);
-//            Toast.makeText(this, loc + "/" + cat + "/" + min + "/" + max, Toast.LENGTH_SHORT).show();
             drawerLayout.closeDrawer(GravityCompat.START);
         });
 
