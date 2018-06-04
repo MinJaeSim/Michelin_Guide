@@ -8,7 +8,7 @@ import java.util.List;
 public class Restaurant implements Serializable{
     @SerializedName("RNumber")
     private String rNumber;
-    @SerializedName("KName")
+    @SerializedName("Name")
     private String rName;
     @SerializedName("Grade")
     private int grade;

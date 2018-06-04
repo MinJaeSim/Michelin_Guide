@@ -34,10 +34,10 @@ public class RestaurantFragment extends Fragment {
 
         adapter = new RestaurantListAdapter(new ArrayList<>());
         recyclerView.setAdapter(adapter);
-        adapter.setListener((MainActivity)getActivity());
+        adapter.setListener((MainActivity) getActivity());
         new Thread(() -> {
             try {
-                List<Restaurant> list = DatabaseClient.getInstance().getRestaurant().execute().body();
+                List<Restaurant> list = DatabaseClient.getInstance().getRestaurant(MainActivity.language).execute().body();
                 adapter.setRestaurantList(list);
                 getActivity().runOnUiThread(adapter::notifyDataSetChanged);
             } catch (IOException e) {
@@ -48,10 +48,10 @@ public class RestaurantFragment extends Fragment {
         return view;
     }
 
-    public void updateListBySimpleQuery(String loc, String cat, String name) {
+    public void updateListBySimpleQuery(String lan, String loc, String cat, String name) {
         new Thread(() -> {
             try {
-                List<Restaurant> list = DatabaseClient.getInstance().getRestaurantBySimpleQuery(loc, cat, name).execute().body();
+                List<Restaurant> list = DatabaseClient.getInstance().getRestaurantBySimpleQuery(lan, loc, cat, name).execute().body();
                 adapter.setRestaurantList(list);
                 Objects.requireNonNull(getActivity()).runOnUiThread(adapter::notifyDataSetChanged);
             } catch (IOException e) {
@@ -60,10 +60,10 @@ public class RestaurantFragment extends Fragment {
         }).start();
     }
 
-    public void updateListByComplexQuery(String loc, String cat, String min, String max, String grade) {
+    public void updateListByComplexQuery(String lan, String loc, String cat, String min, String max, String grade) {
         new Thread(() -> {
             try {
-                List<Restaurant> list = DatabaseClient.getInstance().getRestaurantByComplexQuery(loc, cat, min, max, grade).execute().body();
+                List<Restaurant> list = DatabaseClient.getInstance().getRestaurantByComplexQuery(lan, loc, cat, min, max, grade).execute().body();
                 adapter.setRestaurantList(list);
                 Objects.requireNonNull(getActivity()).runOnUiThread(adapter::notifyDataSetChanged);
             } catch (IOException e) {
@@ -72,10 +72,10 @@ public class RestaurantFragment extends Fragment {
         }).start();
     }
 
-    public void updateListAll() {
+    public void updateListAll(String lan) {
         new Thread(() -> {
             try {
-                List<Restaurant> list = DatabaseClient.getInstance().getRestaurant().execute().body();
+                List<Restaurant> list = DatabaseClient.getInstance().getRestaurant(lan).execute().body();
                 adapter.setRestaurantList(list);
                 Objects.requireNonNull(getActivity()).runOnUiThread(adapter::notifyDataSetChanged);
             } catch (IOException e) {

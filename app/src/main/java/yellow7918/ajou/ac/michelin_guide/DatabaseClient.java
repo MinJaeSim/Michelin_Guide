@@ -31,18 +31,18 @@ public class DatabaseClient implements DatabaseAPI {
     }
 
     @Override
-    public Call<List<Restaurant>> getRestaurant() {
-        return api.getRestaurant();
+    public Call<List<Restaurant>> getRestaurant(String lan) {
+        return api.getRestaurant(lan);
     }
 
     @Override
-    public Call<List<Restaurant>> getRestaurantBySimpleQuery(String loc, String cat, String name) {
-        return api.getRestaurantBySimpleQuery(loc, cat, name);
+    public Call<List<Restaurant>> getRestaurantBySimpleQuery(String lan, String loc, String cat, String name) {
+        return api.getRestaurantBySimpleQuery(lan, loc, cat, name);
     }
 
     @Override
-    public Call<List<Restaurant>> getRestaurantByComplexQuery(String loc, String cat, String min, String max, String grade) {
-        return api.getRestaurantByComplexQuery(loc, cat, min, max, grade);
+    public Call<List<Restaurant>> getRestaurantByComplexQuery(String lan, String loc, String cat, String min, String max, String grade) {
+        return api.getRestaurantByComplexQuery(lan, loc, cat, min, max, grade);
     }
 
     private static class SingleTon {

@@ -25,7 +25,7 @@
         <FrameLayout
             android:id="@+id/container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
     </LinearLayout>
 
     <android.support.design.widget.NavigationView
@@ -37,16 +37,16 @@
 
         <include
             layout="@layout/filter"
-            android:layout_gravity="center_vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical" />
 
         <Button
             android:id="@+id/confirm"
-            android:text="@string/string_search"
-            android:layout_gravity="bottom|center_horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:text="@string/string_search" />
 
 
     </android.support.design.widget.NavigationView>
