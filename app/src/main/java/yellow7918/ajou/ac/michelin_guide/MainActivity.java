@@ -13,11 +13,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -31,9 +32,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appyvet.materialrangebar.RangeBar;
-
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity implements OnRestaurantClickListener {
 
@@ -91,7 +89,6 @@ public class MainActivity extends AppCompatActivity implements OnRestaurantClick
                 d = getDrawable(R.drawable.bg1);
                 break;
         }
-//        d = getDrawable(R.drawable.bg1);
         navigationView.getHeaderView(0).setBackground(d);
 
         fragment = new RestaurantFragment();
@@ -143,9 +140,60 @@ public class MainActivity extends AppCompatActivity implements OnRestaurantClick
 
         Button confirm = findViewById(R.id.confirm);
 
+        LinearLayout filters = findViewById(R.id.filter_result);
+
         EditText location = findViewById(R.id.text_location);
+        TextView locationTextView = new TextView(getApplicationContext());
+        location.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                filters.removeView(locationTextView);
+                locationTextView.setText(String.format("%s : %s", getString(R.string.string_simple_category2), charSequence));
+                locationTextView.setTextSize(16);
+                locationTextView.setTextColor(getColor(R.color.colorPrimary));
+                filters.addView(locationTextView);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
         EditText category = findViewById(R.id.text_category);
+        TextView categoryTextView = new TextView(getApplicationContext());
+        category.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                filters.removeView(categoryTextView);
+                categoryTextView.setText(String.format("%s : %s", getString(R.string.string_simple_category3), charSequence));
+                categoryTextView.setTextSize(16);
+                categoryTextView.setTextColor(getColor(R.color.colorPrimary));
+                filters.addView(categoryTextView);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         RangeBar money = findViewById(R.id.money);
+        TextView moneyTextView = new TextView(getApplicationContext());
+        money.setOnRangeBarChangeListener((rangeBar, leftPinIndex, rightPinIndex, leftPinValue, rightPinValue) -> {
+            filters.removeView(moneyTextView);
+            moneyTextView.setText(String.format("%s : %d ~ %d", getString(R.string.string_money2), Integer.parseInt(leftPinValue) * 10000, Integer.parseInt(rightPinValue) * 10000));
+            moneyTextView.setTextSize(16);
+            moneyTextView.setTextColor(getColor(R.color.colorPrimary));
+            filters.addView(moneyTextView);
+        });
 
         String[] spinnerList = {getString(R.string.string_simple_category1), getString(R.string.string_simple_category2), getString(R.string.string_simple_category3)};
         SpinnerAdapter spinnerAdapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, spinnerList);
@@ -300,7 +348,6 @@ public class MainActivity extends AppCompatActivity implements OnRestaurantClick
 
     @Override
     protected void attachBaseContext(Context newBase) {
-//        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
         super.attachBaseContext(MyContextWrapper.wrap(newBase, language));
     }
 }

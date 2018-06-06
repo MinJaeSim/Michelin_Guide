@@ -45,6 +45,11 @@ public class DatabaseClient implements DatabaseAPI {
         return api.getRestaurantByComplexQuery(lan, loc, cat, min, max, grade);
     }
 
+    @Override
+    public Call<List<Restaurant>> getGradeDescription(String lan, String grade) {
+        return api.getGradeDescription(lan,grade);
+    }
+
     private static class SingleTon {
         private static final DatabaseClient INSTANCE = new DatabaseClient();
     }

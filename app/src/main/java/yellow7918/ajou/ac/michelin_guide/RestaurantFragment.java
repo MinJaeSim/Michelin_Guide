@@ -16,8 +16,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-
 public class RestaurantFragment extends Fragment {
 
     private RecyclerView recyclerView;

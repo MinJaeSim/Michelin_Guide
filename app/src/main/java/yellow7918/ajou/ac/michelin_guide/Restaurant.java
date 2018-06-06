@@ -3,9 +3,8 @@ package yellow7918.ajou.ac.michelin_guide;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.List;
 
-public class Restaurant implements Serializable{
+public class Restaurant implements Serializable {
     @SerializedName("RNumber")
     private String rNumber;
     @SerializedName("Name")
@@ -26,6 +25,9 @@ public class Restaurant implements Serializable{
     private String imgRsc3;
     @SerializedName("Category")
     private String category;
+    @SerializedName("Grade_Desc")
+    private String gradeDesc;
+
 
     public String getrNumber() {
         return rNumber;
@@ -105,6 +107,14 @@ public class Restaurant implements Serializable{
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getGradeDesc() {
+        return gradeDesc;
+    }
+
+    public void setGradeDesc(String gradeDesc) {
+        this.gradeDesc = gradeDesc;
     }
 
     @Override

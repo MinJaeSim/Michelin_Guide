@@ -44,8 +44,12 @@
         <Button
             android:id="@+id/confirm"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
+            android:background="@color/colorPrimary"
             android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="4dp"
+            android:textColor="@color/colorWhite"
+            style="@style/Base.TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
             android:text="@string/string_search" />
 
 
