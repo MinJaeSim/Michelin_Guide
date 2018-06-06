@@ -3,6 +3,7 @@ package yellow7918.ajou.ac.michelin_guide;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -26,9 +27,13 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appyvet.materialrangebar.RangeBar;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity implements OnRestaurantClickListener {
 
@@ -48,10 +53,15 @@ public class MainActivity extends AppCompatActivity implements OnRestaurantClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
+
+        Typeface font = Typeface.createFromAsset(this.getAssets(), "fonts/BMYEONSUNG.otf");
+        TextView title = toolbar.findViewById(R.id.toolbar_title);
+        title.setTypeface(font);
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
@@ -81,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements OnRestaurantClick
                 d = getDrawable(R.drawable.bg1);
                 break;
         }
-
+//        d = getDrawable(R.drawable.bg1);
         navigationView.getHeaderView(0).setBackground(d);
 
         fragment = new RestaurantFragment();
@@ -169,6 +179,9 @@ public class MainActivity extends AppCompatActivity implements OnRestaurantClick
         });
 
         EditText editText = findViewById(R.id.text_search);
+        editText.getBackground().setColorFilter(getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+
+
         ImageView searchButton = findViewById(R.id.search_button);
         searchButton.setOnClickListener(view -> {
             String searchData = editText.getText().toString();
@@ -270,16 +283,24 @@ public class MainActivity extends AppCompatActivity implements OnRestaurantClick
 
     private void hideSearch() {
         searchLayout.setVisibility(View.GONE);
+        Drawable menu = getDrawable(R.drawable.ic_nothing);
+        toggle.setHomeAsUpIndicator(menu);
         toggle.setDrawerIndicatorEnabled(false);
+        toggle.syncState();
     }
 
     private void showSearch() {
         searchLayout.setVisibility(View.VISIBLE);
         toggle.setDrawerIndicatorEnabled(true);
+        Drawable menu = getDrawable(R.drawable.ic_menu);
+        menu.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+        toggle.setHomeAsUpIndicator(menu);
+        toggle.syncState();
     }
 
     @Override
     protected void attachBaseContext(Context newBase) {
+//        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
         super.attachBaseContext(MyContextWrapper.wrap(newBase, language));
     }
 }
