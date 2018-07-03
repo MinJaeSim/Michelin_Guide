@@ -5,10 +5,10 @@
 Application Detail
 ----
 
-<img src="https://github.com/MinJaeSim/Michelin_Guide/blob/master/img/tech.jpeg" width ="100%" height="100%">
+<img src="https://github.com/MinJaeSim/Michelin_Guide/blob/master/img/tech.png" width ="100%" height="100%">
 
 
-<img src="https://github.com/MinJaeSim/Michelin_Guide/blob/master/img/schema.jpeg" width ="100%" height="100%">
+<img src="https://github.com/MinJaeSim/Michelin_Guide/blob/master/img/schema.png" width ="100%" height="100%">
 
 
 ------
@@ -49,4 +49,4 @@ Application pictures
 Application Demo
 -------
 
-[![Demo](http://img.youtu.be/vi/5juwsthDrNU/0.jpg)](https://youtu.be/5juwsthDrNU)
+[![Demo](http://img.youtube.com/vi/5juwsthDrNU/0.jpg)](https://youtu.be/5juwsthDrNU)
